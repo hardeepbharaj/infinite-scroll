@@ -1,24 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
+import { Redirect, Switch, Route, Link } from "react-router-dom";
+import { withRouter } from "react-router";
+
+import { ProtectedRoute } from './protected.route';
+
+import NavBar from './NavBar';
+import NewsArticle from './NewsArticle';
+import LoginPage from './LoginPage';
+
 import './App.css';
 
-function App() {
+const App: React.FC = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="main">
+        <NavBar />
+        <Switch>
+          <Route exact path="/login" component={LoginPage} />
+          <ProtectedRoute exact path="/" component={NewsArticle} />
+        </Switch>
+      </div>
     </div>
   );
 }
